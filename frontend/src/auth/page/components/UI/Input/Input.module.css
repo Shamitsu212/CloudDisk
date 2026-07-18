@@ -1,0 +1,20 @@
+.inputContainer{
+
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+
+    align-items: start;
+}
+.inputContainer__label{
+    font-family: var(--font-main);
+    font-size: 1rem;
+}
+.inputContainer__input{
+    font-family: var(--font-main);
+
+    border: none;
+    border-bottom: 1px solid black;
+
+    outline: none;
+}

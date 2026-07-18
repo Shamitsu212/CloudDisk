@@ -1,0 +1,11 @@
+:root {
+    --bg: #f5f5f5;
+    --main: #ffffff;
+    --text: #111111;
+
+    --border: #e5e7eb;
+    --hover: #f0f0f0;
+
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+}

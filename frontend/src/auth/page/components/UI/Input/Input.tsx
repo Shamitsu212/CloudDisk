@@ -7,21 +7,33 @@ interface Props{
 
     placeholder: string,
     type: string,
+
+    label: string,
 }
 
 
-function Input({value, setValue, placeholder, type}:Props){
+function Input({value, setValue, placeholder, type, label}:Props){
 
     return(
 
-        <input
-            type={type}
-            placeholder={placeholder}
-            className={styles.input}
+        <div className={styles.inputContainer}>
 
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-        />
+            <label className={styles.inputContainer__label}>
+                {label}
+            </label>
+
+            <input
+                type={type}
+                placeholder={placeholder}
+                className={styles.inputContainer__input}
+
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+            />
+
+        </div>
+
+        
         
     )
 }

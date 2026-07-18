@@ -10,6 +10,7 @@ interface Props{
 function Button({ text, onclick, type }: Props){
 
     return(
+        
         <button 
             onClick={onclick}
             className={styles.button}
@@ -17,6 +18,7 @@ function Button({ text, onclick, type }: Props){
         >
             {text}
         </button>
+        
     )
 }
 
