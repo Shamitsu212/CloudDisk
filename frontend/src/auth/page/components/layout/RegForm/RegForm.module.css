@@ -10,4 +10,62 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
+
+    min-width: 396px;
+    min-height: 400px;
+}
+.form__collumn{
+    display: flex;
+    flex-direction: column;
+
+    min-width: 395px;
+}
+
+.collumn__description{
+    display: flex;
+    flex-direction: column;
+
+    margin: 7px;
+}
+.description__h{
+    font-family: var(--font-main);
+    font-weight: 600;
+    color: var(--text);
+}
+.description__p{
+    font-family: var(--font-main);
+    font-weight: 400;
+    color: var(--text-sec);
+}
+.collumn__inputs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+.inputs__password{
+    width: 100%;
+    max-width: 340px;
+}
+.password__description{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+
+    font-family: var(--font-main);
+    color: var(--text-sec);
+    font-size: 0.7rem;
+}
+.form__redirect{
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    font-family: var(--font-main);
+    color: var(--text-sec);
+    font-weight: 300;
+    text-decoration: underline;
+    font-size: 0.8rem;
+
+    cursor: pointer;
 }

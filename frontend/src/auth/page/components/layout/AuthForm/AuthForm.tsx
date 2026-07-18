@@ -9,6 +9,8 @@ import { loginRequest } from '../../../../api/auth/authApi'
 
 import { useAppDispatch } from '../../../../../app/store/useAppHooks'
 import { login } from '../../../../slice/authSlice'
+import Logo from '../../UI/Logo/Logo'
+import { KeyRound, Mail } from 'lucide-react'
 
 interface Props {
     changeForm: (form: "log" | "reg") => void
@@ -45,43 +47,53 @@ function AuthForm({changeForm}: Props){
             onSubmit={handleSubmit}    
         >
 
-            <h1> Авторизация</h1>
+            <div className={styles.form__collumn}>
 
-            <div className={styles.form__inputContainer}>
+                <Logo/>
 
-                <Input 
-                    value={email} 
-                    setValue={setEmail}
+                <div className={styles.collumn__description}>
+                    <h1 className={styles.description__h}>Добро пожаловать!</h1>
+                    <p className={styles.description__p}>Войдите в свой аккаунт чтобы продолжить</p>
+                </div>
+            
+                <div className={styles.collumn__inputs}>
 
-                    placeholder='Enter email'
-                    type='email'
+                    <Input 
+                        value={email} 
+                        setValue={setEmail}
 
-                    label='Email'
-                />
+                        placeholder='Enter email'
+                        type='email'
+
+                        label='Email'
+                        icon={<Mail size={14} />}
+                    />
 
 
 
-                <Input 
-                    value={password}
-                    setValue={setPassword}
+                    <Input 
+                        value={password}
+                        setValue={setPassword}
 
-                    placeholder='Enter password'
-                    type='password'
+                        placeholder='Enter password'
+                        type='password'
 
-                    label='Password'
-                />
+                        label='Password'
+                        icon={<KeyRound size={14} />}
+                    />
 
+                </div>
 
             </div>
 
-            <div>
+            <div className={styles.form__button}>
                 <Button 
                     text='Войти' 
                     type='submit'
                 />
             </div>
 
-            <button onClick={() => changeForm("reg")}>
+            <button className={styles.form__redirect} onClick={() => changeForm("reg")}>
                 Еще не зарегестрированны? 
             </button>
             

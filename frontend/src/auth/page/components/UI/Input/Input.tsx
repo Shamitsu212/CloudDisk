@@ -1,40 +1,46 @@
-import type { SetStateAction } from 'react'
+import { useRef, type ReactNode, type SetStateAction } from 'react'
 import styles from './Input.module.css'
 
-interface Props{
-    value: string,
+interface Props {
+    value: string
     setValue: React.Dispatch<SetStateAction<string>>
 
-    placeholder: string,
-    type: string,
+    placeholder: string
+    type: string
 
-    label: string,
+    label: string
+    icon?: ReactNode
 }
 
+function Input({ value, setValue, placeholder, type, label, icon }: Props) {
+    const inputRef = useRef<HTMLInputElement>(null)
 
-function Input({value, setValue, placeholder, type, label}:Props){
+    return (
+        <div className={styles.Container}>
 
-    return(
-
-        <div className={styles.inputContainer}>
-
-            <label className={styles.inputContainer__label}>
+            <label className={styles.Container__label}>
                 {label}
             </label>
 
-            <input
-                type={type}
-                placeholder={placeholder}
-                className={styles.inputContainer__input}
+            <div
+                className={styles.Container__inputContainer}
+                onClick={() => inputRef.current?.focus()}
+            >
+                <div className={styles.inputContainer__icon}>
+                    {icon}
+                </div>
+                
 
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-            />
-
+                <input
+                    ref={inputRef}
+                    type={type}
+                    placeholder={placeholder}
+                    className={styles.inputContainer__input}
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                />
+            </div>
         </div>
-
-        
-        
     )
 }
 

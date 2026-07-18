@@ -4,6 +4,9 @@ import { useState } from 'react'
 
 import Button from '../../UI/Button/Button'
 import Input from '../../UI/Input/Input'
+import Logo from '../../UI/Logo/Logo'
+
+import { KeyRound, Mail, ShieldAlert, User } from 'lucide-react'
 
 import { regRequest } from '../../../../api/reg/regApi'
 
@@ -46,42 +49,55 @@ function RegForm({changeForm}: Props){
             onSubmit={handleSubmit}    
         >
 
-            <div className={styles.form__inputContainer}>
+            <div className={styles.form__collumn}>
 
-                    <h1> Регистрация </h1>
+                <Logo/>
 
+                <div className={styles.collumn__description}>
+                    <h1 className={styles.description__h}>Создайте аккаунт</h1>
+                    <p className={styles.description__p}>Начните хранить свои данные в облаке</p>
+                </div>
+
+                <div className={styles.collumn__inputs}>
+
+                
                     <Input 
                         value={email} 
                         setValue={setEmail}
-
                         placeholder='Enter email'
                         type='email'
-
                         label='Email'
+                        icon={<Mail size={14} />}
                     />
-
-
                     <Input 
                         value={name} 
                         setValue={setName}
-
                         placeholder='Enter Username'
                         type='text'
-
                         label='Username'
+                        icon={<User size={14}  />}
                     />
+                    <div className={styles.inputs__password}>
+
+                        <Input 
+                            value={password}
+                            setValue={setPassword}
+                            placeholder='Enter password'
+                            type='password'
+                            label='Password'
+                            icon={<KeyRound size={14}  />}
+                        />
+
+                        <p className={styles.password__description}>
+                            <ShieldAlert size={12} />
+                            at least 8 characters
+                        </p>
 
 
+                    </div>
 
-                    <Input 
-                        value={password}
-                        setValue={setPassword}
-
-                        placeholder='Enter password'
-                        type='password'
-
-                        label='Password'
-                    />
+                </div>
+                
 
             </div>
 
@@ -92,7 +108,7 @@ function RegForm({changeForm}: Props){
                 />
             </div>
 
-            <button onClick={() => changeForm("log")}>
+            <button className={styles.form__redirect} onClick={() => changeForm("log")}>
                 Уже зарегестрированны? Нажмите чтоб перейти к авторизации
             </button>
             
