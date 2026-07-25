@@ -3,7 +3,7 @@ import type { RegDto, RegResponse } from "./types";
 
 export const regRequest = async(data:RegDto): Promise<RegResponse> => {
 
-    const response = await fetch("http://localhost:5000/auth/register", {
+    const response = await fetch("http://localhost:8080/api/v1/auth/register", {
 
         method: "POST",
 

@@ -2,7 +2,7 @@ import type { LoginDto, LoginResponse } from "./types";
 
 export const loginRequest = async( data: LoginDto): Promise<LoginResponse> => {
 
-    const response = await fetch("http://localhost:5000/auth/login", {
+    const response = await fetch("http://localhost:8080/api/v1/auth/login", {
 
         method: "POST",
 
