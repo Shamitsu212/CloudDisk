@@ -2,6 +2,8 @@ import styles from './RegForm.module.css'
 
 import { useState } from 'react'
 
+import { useNavigate } from "react-router-dom";
+
 import Button from '../../UI/Button/Button'
 import Input from '../../UI/Input/Input'
 import Logo from '../../UI/Logo/Logo'
@@ -19,6 +21,8 @@ interface Props {
 
 function RegForm({changeForm}: Props){
 
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState<string>("")
     const [name, setName] = useState<string>("")
     const [password, setPassword] = useState<string>("")
@@ -33,6 +37,7 @@ function RegForm({changeForm}: Props){
             const response = await regRequest({email, password, name})
 
             dispatch(login(response))
+            navigate("/");
         }
 
         catch(err){

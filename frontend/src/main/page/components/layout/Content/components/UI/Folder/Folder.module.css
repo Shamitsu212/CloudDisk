@@ -1,0 +1,113 @@
+.article{
+    width: 310px;
+    height: 100px;
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+    background-color: var(--bg);
+
+    padding: 15px;
+
+    border-radius: 14px;
+    border: 1px solid var(--border);
+
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.12);
+
+    position: relative;
+}
+.article:hover{
+    cursor: pointer;
+}
+
+.article__folder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: all 0.4s ease;
+}
+
+.article:hover .article__folder{
+    color: var(--primary-hover);
+}
+
+.article__text{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    font-family: var(--font-main);
+
+    max-width: 156px;
+}
+
+.text__h{
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text);
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.text__p{
+    font-weight: 400;
+    font-size: 0.8rem;
+    color: var(--text-sec);
+}
+
+.article__button{
+    position: absolute;
+    right: 10px;
+    top: 8px;
+
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+.article__button:hover{
+    cursor: pointer;
+}
+
+.hidden{
+    display: none
+}
+
+.editMenu{
+    display: flex;
+    flex-direction: column;
+    
+    position: absolute;
+    z-index: 99999;
+    right: -120px;
+    top: 0px;
+    
+    width: 130px;
+
+    background-color: var(--bg);
+
+    border-radius: 8px;
+
+    padding: 10px;
+
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.12);
+
+}
+.editMenu button{
+    outline: none;
+    border: none;
+    background-color: transparent;
+
+    display: flex;
+    justify-content: start;
+
+    padding: 5px;
+}
+.editMenu button:hover{
+    background-color: var(--main);
+    cursor: pointer;
+}

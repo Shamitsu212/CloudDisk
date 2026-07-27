@@ -1,0 +1,31 @@
+.Logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.Logo:hover{
+    cursor: pointer;
+}
+
+.Logo__icon{
+    color: var(--primary);
+    transition: all 0.4s ease;
+}
+
+.Logo:hover .Logo__icon{
+    color: var(--primary-hover);
+}
+
+.Logo__text{
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 2rem;
+
+    transition: all 0.4s ease;
+}
+
+.Logo:hover .Logo__text{
+    color: var(--primary);
+}

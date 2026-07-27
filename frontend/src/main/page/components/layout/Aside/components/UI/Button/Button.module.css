@@ -1,0 +1,25 @@
+.button{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+
+    padding: 8px;
+
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    transition: all 0.5s ease;
+
+    font-family: var(--font-main);
+    font-weight: 400;
+    font-size: 1.4rem;
+}
+
+.button:hover{
+    background-color: var(--hover);
+    cursor: pointer;
+    color: var(--primary);
+}

@@ -14,7 +14,7 @@ export default function ProtectedRoute({ children }: Props) {
     );
 
     if (!isAuth) {
-        return <Navigate to="/" replace />;
+        return <Navigate to="/login" replace />;
     }
 
     return children;
