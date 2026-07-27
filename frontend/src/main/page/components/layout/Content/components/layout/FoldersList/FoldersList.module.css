@@ -1,0 +1,26 @@
+.FoldersList{
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    min-width: 0;
+    min-height: 400px;
+}
+
+.FoldersList__h{
+    font-family: var(--font-main);
+    font-weight: 400;
+    font-size: 2rem;
+}
+.FoldersList__list{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+
+    width: 100%;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    padding: 10px 10px  30px 10px
+}
