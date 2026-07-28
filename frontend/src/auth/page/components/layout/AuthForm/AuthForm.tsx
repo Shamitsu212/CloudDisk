@@ -2,8 +2,6 @@ import styles from './AuthForm.module.css'
 
 import { useState } from 'react'
 
-import { useNavigate } from "react-router-dom";
-
 import Button from '../../UI/Button/Button'
 import Input from '../../UI/Input/Input'
 
@@ -13,6 +11,7 @@ import { useAppDispatch } from '../../../../../app/store/useAppHooks'
 import { login } from '../../../../slice/authSlice'
 import Logo from '../../UI/Logo/Logo'
 import { KeyRound, Mail } from 'lucide-react'
+import { useAppNavigate } from '../../../../../app/hooks/useAppNavigate';
 
 interface Props {
     changeForm: (form: "log" | "reg") => void
@@ -20,7 +19,7 @@ interface Props {
 
 function AuthForm({changeForm}: Props){
 
-    const navigate = useNavigate();
+    const nav = useAppNavigate()
 
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
@@ -35,7 +34,7 @@ function AuthForm({changeForm}: Props){
             const response = await loginRequest({email, password})
 
             dispatch(login(response))
-            navigate("/");
+            nav.toMain()
         }
 
         catch(err){

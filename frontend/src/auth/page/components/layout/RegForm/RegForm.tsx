@@ -2,8 +2,6 @@ import styles from './RegForm.module.css'
 
 import { useState } from 'react'
 
-import { useNavigate } from "react-router-dom";
-
 import Button from '../../UI/Button/Button'
 import Input from '../../UI/Input/Input'
 import Logo from '../../UI/Logo/Logo'
@@ -14,6 +12,7 @@ import { regRequest } from '../../../../api/reg/regApi'
 
 import { useAppDispatch } from '../../../../../app/store/useAppHooks'
 import { login } from '../../../../slice/authSlice'
+import { useAppNavigate } from '../../../../../app/hooks/useAppNavigate';
 
 interface Props {
     changeForm: (form: "log" | "reg") => void
@@ -21,7 +20,7 @@ interface Props {
 
 function RegForm({changeForm}: Props){
 
-    const navigate = useNavigate();
+    const nav = useAppNavigate()
 
     const [email, setEmail] = useState<string>("")
     const [name, setName] = useState<string>("")
@@ -37,7 +36,7 @@ function RegForm({changeForm}: Props){
             const response = await regRequest({email, password, name})
 
             dispatch(login(response))
-            navigate("/");
+            nav.toMain()
         }
 
         catch(err){

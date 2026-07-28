@@ -1,16 +1,15 @@
 import styles from "./Logo.module.css"
 
-import { useNavigate } from "react-router-dom"
-
 import { CloudIcon } from "lucide-react"
+import { useAppNavigate } from "../../../../../../../../app/hooks/useAppNavigate"
 
 
 function Logo(){
 
-    const navigate = useNavigate()
+    const nav = useAppNavigate()
 
     function handleClick(){
-        navigate("/")
+        nav.toMain()
     }
 
     return(

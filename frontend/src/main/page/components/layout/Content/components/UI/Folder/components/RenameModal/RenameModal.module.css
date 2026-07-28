@@ -1,0 +1,96 @@
+.hidden {
+    display: none;
+}
+
+.modal{
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal__window{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: var(--main);
+    padding: 10px;
+    border-radius: 16px;
+}
+.window__h{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-family: var(--font-main);
+    font-weight: 600;
+    font-size: 1.8rem;
+
+    margin-bottom: 20px;
+}
+.window__buttonContainer{
+    margin-top: 22px;
+
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.buttonContainer__cancel{
+    padding: 10px 12px 10px 12px;
+    border-radius: 10px;
+
+    border: 1px solid var(--border);
+    background-color: var(--bg);
+
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.12);
+    color: var(--text);
+
+    transition: all 0.5s ease;
+}
+.buttonContainer__cancel:hover{
+    background-color: var(--hover);
+    cursor: pointer;
+}
+
+.buttonContainer__del{
+    padding: 10px 12px 10px 12px;
+    border-radius: 10px;
+
+    border: none;
+    background-color: var(--primary);
+
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.12);
+    color: white;
+
+    transition: all 0.5s ease;
+}
+.buttonContainer__del:hover{
+    background-color: var(--primary-hover);
+    cursor: pointer;
+}
+
+.window__input{
+    padding: 5px;
+    width: 220px;
+
+    border: none;
+    border-bottom: 1px solid black;
+
+    font-family: var(--font-main);
+    font-weight: 400;
+    font-size: 1rem;
+
+    outline: none;
+    transition: all 0.5s ease;
+}
+
+.window__input:focus{
+    border-bottom: 1px solid var(--primary);
+}
