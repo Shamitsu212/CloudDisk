@@ -13,11 +13,9 @@ import (
 	"github.com/joho/godotenv"
 )
 
-// CORS
 func corsMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
-        // запросы с Vite + заголовок в headers
 		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:5173")
 		w.Header().Set("Access-Control-Allow-Credentials", "true")
 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
@@ -33,41 +31,48 @@ func corsMiddleware(next http.Handler) http.Handler {
 }
 
 func main() {
-    mux := http.NewServeMux()
+	mux := http.NewServeMux()
 
-    if err := godotenv.Load(); err != nil {
-        log.Println("No .env file found, using environment variables")
-    }
+	if err := godotenv.Load(); err != nil {
+		log.Println("No .env file found, using environment variables")
+	}
 
-    utils.InitJWT()
+	utils.InitJWT()
 
-    db := db.NewDatabase()
-    if err := db.Connect(); err != nil {
-        log.Fatal("Ошибка подключения к базе данных: ", err)
-    }
-    defer db.Close()
+	db := db.NewDatabase()
+	if err := db.Connect(); err != nil {
+		log.Fatal("Ошибка подключения к базе данных: ", err)
+	}
+	defer db.Close()
 
-    authService := service.NewAuthService(db)
-    authHandler := handler.NewAuthHandler(authService)
+	authService := service.NewAuthService(db)
+	authHandler := handler.NewAuthHandler(authService)
 
-    mux.HandleFunc("POST /api/v1/auth/register", authHandler.Register)
-    mux.HandleFunc("POST /api/v1/auth/login", authHandler.Login)
-    mux.HandleFunc("GET /api/v1/health", authHandler.Health)
+	folderService := service.NewFolderService(db)
+	folderHandler := service.NewFolderHandler(folderService)
 
-    port := os.Getenv("APP_PORT")
-    if port == "" {
-        port = "8080"
-    }
+	mux.HandleFunc("POST /api/v1/auth/register", authHandler.Register)
+	mux.HandleFunc("POST /api/v1/auth/login", authHandler.Login)
+	mux.HandleFunc("GET /api/v1/health", authHandler.Health)
+	mux.HandleFunc("POST /api/v1/${user_id}/folders", folderHandler.Create)
+	mux.HandleFunc("DELETE http://localhost:8080/api/v1/${user_id}/folders/${folder_id}", folderHandler.Delete)
+	mux.HandleFunc("PATCH http://localhost:8080/api/v1/${user_id}/folders/${folder_id}/favorite", folderHandler.Favorite)
+	mux.HandleFunc("GET http://localhost:8080/api/v1/${user_id}/folders", folderHandler.GetFolders)
+	mux.HandleFunc("PATCH http://localhost:8080/api/v1/${user_id}/folders/${folder_id}", folderHandler.RenameFolder)
 
-    log.Printf("Сервер запущен: http://localhost:%s", port)
-    log.Printf("Состояние сервера: http://localhost:%s/api/v1/health", port)
-    log.Printf("Регистрация: POST http://localhost:%s/api/v1/auth/register", port)
-    log.Printf("Логин: POST http://localhost:%s/api/v1/auth/login", port)
+	port := os.Getenv("APP_PORT")
+	if port == "" {
+		port = "8080"
+	}
 
-    // оборачиваем маршруты в middleware
-    handlerWithCors := corsMiddleware(mux)
+	log.Printf("Сервер запущен: http://localhost:%s", port)
+	log.Printf("Состояние сервера: http://localhost:%s/api/v1/health", port)
+	log.Printf("Регистрация: POST http://localhost:%s/api/v1/auth/register", port)
+	log.Printf("Логин: POST http://localhost:%s/api/v1/auth/login", port)
 
-    if err := http.ListenAndServe(":"+port, handlerWithCors); err != nil {
-    	log.Fatal(err)
-    }
+	handlerWithCors := corsMiddleware(mux)
+
+	if err := http.ListenAndServe(":"+port, handlerWithCors); err != nil {
+		log.Fatal(err)
+	}
 }
