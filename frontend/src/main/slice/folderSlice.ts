@@ -5,18 +5,7 @@ import type { FolderState } from "./types";
 import { fetchFolders, createFolder, deleteFolder, renameFolder, favoriteFolder } from "./folderThunks";
 
 const initialState: FolderState = {
-    folders: [
-        {
-            id: 1,
-            user_id: 2,
-
-            name: "Доки",
-            files: 12,
-
-            lastUpdate: "",
-            isFavorite: false,
-        }
-    ],
+    folders: [],
     loading: false,
     error: null,
 };
