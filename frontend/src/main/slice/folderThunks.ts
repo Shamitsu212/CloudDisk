@@ -10,8 +10,8 @@ export const fetchFolders = createAsyncThunk(
 
     "folders/fetchFolders",
 
-    async (userId: number) => {
-        return await getFolders(userId);
+    async (user_id: number) => {
+        return await getFolders(user_id);
     }
 
 );
@@ -20,8 +20,8 @@ export const createFolder = createAsyncThunk(
 
     "folders/createFolder",
 
-    async ({ userId, name }: { userId: number; name: string }) => {
-        return await createFolderApi(userId, name);
+    async ({ user_id, name }: { user_id: number; name: string }) => {
+        return await createFolderApi(user_id, name);
     }
 
 );
@@ -30,9 +30,9 @@ export const deleteFolder = createAsyncThunk(
 
     "folders/deleteFolder",
 
-    async ({ userId, folderId }: { userId: number; folderId: number }) => {
-        await deleteFolderApi(userId, folderId);
-        return folderId;
+    async ({ user_id, folder_id }: { user_id: number; folder_id: number }) => {
+        await deleteFolderApi(user_id, folder_id);
+        return folder_id;
     }
 
 );
@@ -41,8 +41,8 @@ export const renameFolder = createAsyncThunk(
 
     "folders/renameFolder",
 
-    async ( {  userId,  folderId,  name }: { userId: number; folderId: number; name: string }) => {
-        return await renameFolderApi(userId, folderId, name);
+    async ( {  user_id,  folder_id,  name }: { user_id: number; folder_id: number; name: string }) => {
+        return await renameFolderApi(user_id, folder_id, name);
     }
 
 );
@@ -50,8 +50,8 @@ export const renameFolder = createAsyncThunk(
 export const favoriteFolder = createAsyncThunk(
     "folders/favoriteFolder",
 
-    async ( { userId, folderId }: { userId: number; folderId: number }) => {
-        return await favoriteFolderApi(userId, folderId);
+    async ( { user_id, folder_id }: { user_id: number; folder_id: number }) => {
+        return await favoriteFolderApi(user_id, folder_id);
     }
 
 );

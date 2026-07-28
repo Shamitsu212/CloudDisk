@@ -4,25 +4,31 @@ import { useRef, useState } from "react";
 import { useClickOutside } from "./hooks/useClickOutside"
 
 import { EllipsisVerticalIcon, FolderIcon } from "lucide-react"
-import { useNavigate } from "react-router-dom";
+import { useAppNavigate } from "../../../../../../../../app/hooks/useAppNavigate";
+import FolderMenu from "./components/FolderMenu/FolderMenu";
+import RenameModal from "./components/RenameModal/RenameModal";
+import DeleteModal from "./components/DeleteModal/DeleteModal";
 
 interface Props {
+    id: number,
     name: string,
     files: number,
     lastUpdate: string
 }
 
-function Folder({name, files, lastUpdate}:Props){
+function Folder({id, name, files, lastUpdate}:Props){
 
-    const [open, setOpen] = useState<boolean>(false)
+    const [openRename, setOpenRename] = useState<boolean>(false)
+    const [openDelete, setOpenDelete] = useState<boolean>(false)
+    const [openMenu, setOpenMenu] = useState<boolean>(false)
 
     const articleRef = useRef<HTMLElement>(null);
-    useClickOutside(articleRef, () => setOpen(false));
+    useClickOutside(articleRef, () => setOpenMenu(false));
 
-    const navigate = useNavigate()
+    const nav = useAppNavigate()
 
     function handleClick(){
-        navigate("/1")
+        nav.toFolder(id)
     }
 
     return(
@@ -41,42 +47,53 @@ function Folder({name, files, lastUpdate}:Props){
                 <h5 className={styles.text__h}>
                     {name}
                 </h5>
+
                 <p className={styles.text__p}>
                     {files} файлов
                 </p>
+
                 <time className={styles.text__p}>
                     Обновлено — {lastUpdate}
                 </time>
 
             </div>
-
+ 
             <button 
                 className={styles.article__button}
                 onClick={(e) => {
                     e.stopPropagation();
-                    setOpen((prev) => !prev);
+                    setOpenMenu((prev) => !prev);
                 }}
             >
                 <EllipsisVerticalIcon size={22}/>
             </button>
 
-            <div 
-                className={open == true ? styles.editMenu : styles.hidden}
-                onClick={(e) => e.stopPropagation()}    
-            >
+            <FolderMenu 
+                id={id} 
 
-                <button>
-                    Удалить
-                </button>
+                open={openMenu} 
+                setOpen={setOpenMenu} 
 
-                <button>
-                    В избранные 
-                </button>
+                openRename={openRename}
+                setOpenRename={setOpenRename}
 
-                <button>
-                    Переименовать
-                </button>
-            </div>
+                openDelete={openDelete}
+                setOpenDelete={setOpenDelete}
+            />
+
+            <RenameModal 
+                id={id} 
+
+                open={openRename} 
+                setOpen={setOpenRename}  
+            />
+
+            <DeleteModal 
+                id={id} 
+
+                open={openDelete} 
+                setOpen={setOpenDelete}
+            />
 
         </article>
     )
