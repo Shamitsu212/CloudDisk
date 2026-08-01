@@ -39,26 +39,27 @@ func main() {
 
 	utils.InitJWT()
 
-	db := db.NewDatabase()
-	if err := db.Connect(); err != nil {
+	database := db.NewDatabase()
+	if err := database.Connect(); err != nil {
 		log.Fatal("Ошибка подключения к базе данных: ", err)
 	}
-	defer db.Close()
+	defer database.Close()
 
-	authService := service.NewAuthService(db)
+	authService := service.NewAuthService(database)
 	authHandler := handler.NewAuthHandler(authService)
 
-	folderService := service.NewFolderService(db)
-	folderHandler := service.NewFolderHandler(folderService)
+	folderService := service.NewFolderService(database)
+	folderHandler := handler.NewFolderHandler(folderService)
 
 	mux.HandleFunc("POST /api/v1/auth/register", authHandler.Register)
 	mux.HandleFunc("POST /api/v1/auth/login", authHandler.Login)
 	mux.HandleFunc("GET /api/v1/health", authHandler.Health)
-	mux.HandleFunc("POST /api/v1/${user_id}/folders", folderHandler.Create)
-	mux.HandleFunc("DELETE http://localhost:8080/api/v1/${user_id}/folders/${folder_id}", folderHandler.Delete)
-	mux.HandleFunc("PATCH http://localhost:8080/api/v1/${user_id}/folders/${folder_id}/favorite", folderHandler.Favorite)
-	mux.HandleFunc("GET http://localhost:8080/api/v1/${user_id}/folders", folderHandler.GetFolders)
-	mux.HandleFunc("PATCH http://localhost:8080/api/v1/${user_id}/folders/${folder_id}", folderHandler.RenameFolder)
+
+	mux.HandleFunc("POST /api/v1/{user_id}/folders", folderHandler.Create)
+	mux.HandleFunc("DELETE /api/v1/{user_id}/folders/{folder_id}", folderHandler.Delete)
+	mux.HandleFunc("PATCH /api/v1/{user_id}/folders/{folder_id}/favorite", folderHandler.Favorite)
+	mux.HandleFunc("GET /api/v1/{user_id}/folders", folderHandler.GetFolders)
+	mux.HandleFunc("PATCH /api/v1/{user_id}/folders/{folder_id}", folderHandler.RenameFolder)
 
 	port := os.Getenv("APP_PORT")
 	if port == "" {

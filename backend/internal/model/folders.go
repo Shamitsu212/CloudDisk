@@ -3,17 +3,27 @@ package model
 import "time"
 
 type Folder struct {
-	ID        int       `json:"id"`
-	UserID    int       `json:"user_id"`
-	Name      string    `json:"name"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	ID         int       `json:"id"`
+	UserID     int       `json:"user_id"`
+	Name       string    `json:"name"`
+	IsFavorite bool      `json:"is_favorite"`
+	ParentID   *int      `json:"parent_id,omitempty"`
+	CreatedAt  time.Time `json:"created_at"`
+	UpdatedAt  time.Time `json:"updated_at"`
 }
 
-type CreateFolder struct {
-	Name string `json:"name"`
+type CreateFolderRequest struct {
+	Name     string `json:"name"`
+	ParentID *int   `json:"parent_id,omitempty"`
 }
 
-type RenameFolder struct {
+type RenameFolderRequest struct {
 	NewName string `json:"new_name"`
+}
+
+type FolderResponse struct {
+	ID         int    `json:"id"`
+	Name       string `json:"name"`
+	IsFavorite bool   `json:"is_favorite"`
+	ParentID   *int   `json:"parent_id,omitempty"`
 }
