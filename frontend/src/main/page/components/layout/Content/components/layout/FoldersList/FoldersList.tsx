@@ -13,7 +13,7 @@ function FoldersList(){
             <h2 className={styles.FoldersList__h}>Мои папки</h2>
 
             <div className={styles.FoldersList__list}>
-                {folders.map((f) => (
+                {folders?.map((f) => (
 
                     <Folder 
                         key={f.id} 
