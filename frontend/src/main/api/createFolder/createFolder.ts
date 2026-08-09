@@ -1,4 +1,4 @@
-import { tokenFetch } from "../../app/shared/tokenFetch/tokenFetch";
+import { tokenFetch } from "../../../app/shared/tokenFetch/tokenFetch";
 
 export async function createFolder(user_id:number, name:string){
 
