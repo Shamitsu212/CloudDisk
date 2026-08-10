@@ -8,7 +8,7 @@ import (
 
 	"cloud_disk/internal/model"
 
-	_ "github.com/lib/pq"
+	"github.com/lib/pq"
 )
 
 type Database struct {
@@ -103,53 +103,136 @@ func (r *Database) Exists(email string) (bool, error) {
 }
 
 func (d *Database) CreateFolder(folder *model.Folder) error {
-	query := `INSERT INTO folders (user_id, name, is_favorite, parent_id) 
-              VALUES ($1, $2, $3, $4) RETURNING id, created_at, updated_at`
+    query := `
+        INSERT INTO folders (user_id, name, is_favorite)
+        VALUES ($1, $2, $3)
+        RETURNING id, updated_at
+    `
 
-	return d.db.QueryRow(query, folder.UserID, folder.Name,
-		folder.IsFavorite, folder.ParentID).Scan(&folder.ID, &folder.CreatedAt, &folder.UpdatedAt)
+    err := d.db.QueryRow(
+        query,
+        folder.UserID,
+        folder.Name,
+        folder.IsFavorite,
+    ).Scan(
+        &folder.ID,
+        &folder.LastUpdate,
+    )
+
+    if err != nil {
+        return err
+    }
+
+    folder.Files = []int{}
+
+    return nil
 }
 
 func (d *Database) GetFolders(userID int) ([]model.Folder, error) {
-	query := `SELECT id, user_id, name, is_favorite, parent_id, created_at, updated_at 
-              FROM folders WHERE user_id = $1 ORDER BY created_at DESC`
+    query := `
+        SELECT
+            f.id,
+            f.user_id,
+            f.name,
+            f.updated_at,
+            f.is_favorite,
+            COALESCE(
+                ARRAY_AGG(files.id) FILTER (WHERE files.id IS NOT NULL),
+                '{}'
+            )
+        FROM folders f
+        LEFT JOIN files ON files.folder_id = f.id
+        WHERE f.user_id = $1
+        GROUP BY
+            f.id,
+            f.user_id,
+            f.name,
+            f.updated_at,
+            f.is_favorite
+        ORDER BY f.created_at DESC
+    `
 
-	rows, err := d.db.Query(query, userID)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
+    rows, err := d.db.Query(query, userID)
+    if err != nil {
+        return nil, err
+    }
+    defer rows.Close()
 
-	var folders []model.Folder
-	for rows.Next() {
-		var f model.Folder
-		err := rows.Scan(&f.ID, &f.UserID, &f.Name, &f.IsFavorite,
-			&f.ParentID, &f.CreatedAt, &f.UpdatedAt)
-		if err != nil {
-			return nil, err
-		}
-		folders = append(folders, f)
-	}
+    folders := make([]model.Folder, 0)
 
-	if err = rows.Err(); err != nil {
-		return nil, err
-	}
+    for rows.Next() {
+        var folder model.Folder
 
-	return folders, nil
+        err := rows.Scan(
+            &folder.ID,
+            &folder.UserID,
+            &folder.Name,
+            &folder.LastUpdate,
+            &folder.IsFavorite,
+            pq.Array(&folder.Files),
+        )
+
+        if err != nil {
+            return nil, err
+        }
+
+        folders = append(folders, folder)
+    }
+
+    if err = rows.Err(); err != nil {
+        return nil, err
+    }
+
+    return folders, nil
 }
 
 func (d *Database) GetFolderByID(folderID, userID int) (*model.Folder, error) {
-	query := `SELECT id, user_id, name, is_favorite, parent_id, created_at, updated_at 
-              FROM folders WHERE id = $1 AND user_id = $2`
+    query := `
+        SELECT
+            f.id,
+            f.user_id,
+            f.name,
+            f.updated_at,
+            f.is_favorite,
+            COALESCE(
+                ARRAY_AGG(files.id) FILTER (WHERE files.id IS NOT NULL),
+                '{}'
+            )
+        FROM folders f
+        LEFT JOIN files ON files.folder_id = f.id
+        WHERE f.id = $1 AND f.user_id = $2
+        GROUP BY
+            f.id,
+            f.user_id,
+            f.name,
+            f.updated_at,
+            f.is_favorite
+    `
 
-	var f model.Folder
-	err := d.db.QueryRow(query, folderID, userID).Scan(
-		&f.ID, &f.UserID, &f.Name, &f.IsFavorite, &f.ParentID, &f.CreatedAt, &f.UpdatedAt)
+    var folder model.Folder
 
-	if err == sql.ErrNoRows {
-		return nil, nil
-	}
-	return &f, err
+    err := d.db.QueryRow(
+        query,
+        folderID,
+        userID,
+    ).Scan(
+        &folder.ID,
+        &folder.UserID,
+        &folder.Name,
+        &folder.LastUpdate,
+        &folder.IsFavorite,
+        pq.Array(&folder.Files),
+    )
+
+    if err == sql.ErrNoRows {
+        return nil, nil
+    }
+
+    if err != nil {
+        return nil, err
+    }
+
+    return &folder, nil
 }
 
 func (d *Database) DeleteFolder(folderID, userID int) error {
@@ -167,30 +250,60 @@ func (d *Database) DeleteFolder(folderID, userID int) error {
 }
 
 func (d *Database) ToggleFavorite(folderID, userID int) (bool, error) {
-	var currentFavorite bool
-	err := d.db.QueryRow(`SELECT is_favorite FROM folders WHERE id = $1 AND user_id = $2`,
-		folderID, userID).Scan(&currentFavorite)
-	if err != nil {
-		return false, err
-	}
+    var currentFavorite bool
 
-	newStatus := !currentFavorite
-	_, err = d.db.Exec(`UPDATE folders SET is_favorite = $1 WHERE id = $2 AND user_id = $3`,
-		newStatus, folderID, userID)
+    err := d.db.QueryRow(
+        `SELECT is_favorite
+         FROM folders
+         WHERE id = $1 AND user_id = $2`,
+        folderID,
+        userID,
+    ).Scan(&currentFavorite)
 
-	return newStatus, err
+    if err != nil {
+        return false, err
+    }
+
+    newStatus := !currentFavorite
+
+    _, err = d.db.Exec(
+        `UPDATE folders
+         SET is_favorite = $1, updated_at = NOW()
+         WHERE id = $2 AND user_id = $3`,
+        newStatus,
+        folderID,
+        userID,
+    )
+
+    if err != nil {
+        return false, err
+    }
+
+    return newStatus, nil
 }
 
 func (d *Database) RenameFolder(folderID, userID int, newName string) error {
-	result, err := d.db.Exec(`UPDATE folders SET name = $1 WHERE id = $2 AND user_id = $3`,
-		newName, folderID, userID)
-	if err != nil {
-		return err
-	}
+    result, err := d.db.Exec(
+        `UPDATE folders
+         SET name = $1, updated_at = NOW()
+         WHERE id = $2 AND user_id = $3`,
+        newName,
+        folderID,
+        userID,
+    )
 
-	rowsAffected, _ := result.RowsAffected()
-	if rowsAffected == 0 {
-		return sql.ErrNoRows
-	}
-	return nil
+    if err != nil {
+        return err
+    }
+
+    rowsAffected, err := result.RowsAffected()
+    if err != nil {
+        return err
+    }
+
+    if rowsAffected == 0 {
+        return sql.ErrNoRows
+    }
+
+    return nil
 }

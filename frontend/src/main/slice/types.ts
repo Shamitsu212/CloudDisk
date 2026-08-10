@@ -4,7 +4,7 @@ export interface Folder {
     user_id:  number,
 
     name: string,
-    files: number,
+    files: number[],
 
     lastUpdate: string
 

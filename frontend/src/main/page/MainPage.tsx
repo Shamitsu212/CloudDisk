@@ -21,7 +21,7 @@ function MainPage(){
         }
 
         dispatch(fetchFolders(user_id))
-    }, [dispatch])
+    }, [dispatch, user_id])
 
     return(
         <div className={styles.Container}>

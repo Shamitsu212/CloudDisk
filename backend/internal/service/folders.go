@@ -20,10 +20,10 @@ func (s *FolderService) Create(userID int, req model.CreateFolderRequest) (*mode
 	}
 
 	folder := &model.Folder{
-		UserID:     userID,
-		Name:       req.Name,
-		IsFavorite: false,
-		ParentID:   req.ParentID,
+    	UserID:     userID,
+    	Name:       req.Name,
+    	Files:      []int{},
+    	IsFavorite: false,
 	}
 
 	err := s.repo.CreateFolder(folder)

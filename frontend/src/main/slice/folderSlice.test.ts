@@ -7,10 +7,11 @@ import { fetchFolders, createFolder, deleteFolder, renameFolder, favoriteFolder 
 describe("folderSlice", () => {
 
   it("fetchFolders.pending устанавливает loading", () => {
+
     const state = reducer(
       undefined,
       fetchFolders.pending("request-id", 1)
-    )
+    );
 
     expect(state.loading).toBe(true)
     expect(state.error).toBeNull()
@@ -18,12 +19,13 @@ describe("folderSlice", () => {
   })
 
   it("fetchFolders.fulfilled загружает папки", () => {
+
     const folders = [
       {
         id: 1,
         user_id: 1,
         name: "Folder 1",
-        files: 5,
+        files: [],
         lastUpdate: "2026-08-10",
         isFavorite: false,
       },
@@ -31,7 +33,7 @@ describe("folderSlice", () => {
         id: 2,
         user_id: 1,
         name: "Folder 2",
-        files: 10,
+        files: [],
         lastUpdate: "2026-08-09",
         isFavorite: true,
       },
@@ -44,6 +46,7 @@ describe("folderSlice", () => {
 
     expect(state.loading).toBe(false)
     expect(state.folders).toEqual(folders)
+
   })
 
   it("fetchFolders.rejected устанавливает ошибку", () => {
@@ -51,15 +54,15 @@ describe("folderSlice", () => {
     const state = reducer(
       undefined,
       fetchFolders.rejected(
-        new Error("Ошибка сервера"),
-        "request-id",
-        1
+          new Error("Ошибка сервера"),
+          "request-id",
+          1
       )
-
     )
 
     expect(state.loading).toBe(false)
     expect(state.error).toBe("Ошибка сервера")
+
   })
 
   it("createFolder.fulfilled добавляет папку", () => {
@@ -68,7 +71,7 @@ describe("folderSlice", () => {
       id: 1,
       user_id: 1,
       name: "New Folder",
-      files: 0,
+      files: [],
       lastUpdate: "2026-08-10",
       isFavorite: false,
     }
@@ -79,37 +82,40 @@ describe("folderSlice", () => {
         folder,
         "request-id",
         {
-          user_id: 1,
-          name: "New Folder",
+            user_id: 1,
+            name: "New Folder",
         }
       )
     )
 
     expect(state.folders).toContainEqual(folder)
+
   })
 
   it("deleteFolder.fulfilled удаляет папку", () => {
+
     const initialState = {
       folders: [
         {
-          id: 1,
-          user_id: 1,
-          name: "Folder 1",
-          files: 5,
-          lastUpdate: "2026-08-10",
-          isFavorite: false,
+            id: 1,
+            user_id: 1,
+            name: "Folder 1",
+            files: [],
+            lastUpdate: "2026-08-10",
+            isFavorite: false,
         },
         {
-          id: 2,
-          user_id: 1,
-          name: "Folder 2",
-          files: 10,
-          lastUpdate: "2026-08-09",
-          isFavorite: false,
+            id: 2,
+            user_id: 1,
+            name: "Folder 2",
+            files: [],
+            lastUpdate: "2026-08-09",
+            isFavorite: false,
         },
-      ],
-      loading: false,
-      error: null,
+        ],
+
+        loading: false,
+        error: null,
     }
 
     const state = reducer(
@@ -129,12 +135,12 @@ describe("folderSlice", () => {
         id: 2,
         user_id: 1,
         name: "Folder 2",
-        files: 10,
+        files: [],
         lastUpdate: "2026-08-09",
         isFavorite: false,
       },
     ])
-    
+
   })
 
   it("renameFolder.fulfilled меняет имя папки", () => {
@@ -142,48 +148,50 @@ describe("folderSlice", () => {
     const initialState = {
       folders: [
         {
-          id: 1,
-          user_id: 1,
-          name: "Old Name",
-          files: 5,
-          lastUpdate: "2026-08-10",
-          isFavorite: false,
+            id: 1,
+            user_id: 1,
+            name: "Old Name",
+            files: [],
+            lastUpdate: "2026-08-10",
+            isFavorite: false,
         },
-      ],
-      loading: false,
-      error: null,
+        ],
+        loading: false,
+        error: null,
     }
 
     const state = reducer(
       initialState,
       renameFolder.fulfilled(
-        {
-          id: 1,
-          name: "New Name",
-        },
-        "request-id",
-        {
-          user_id: 1,
-          folder_id: 1,
-          name: "New Name",
-        }
+          {
+            id: 1,
+            name: "New Name",
+          },
+          "request-id",
+          {
+            user_id: 1,
+            folder_id: 1,
+            name: "New Name",
+          }
       )
     )
 
-    expect(state.folders[0].name).toBe("New Name");
+    expect(state.folders[0].name).toBe("New Name")
+
   })
 
   it("favoriteFolder.fulfilled меняет isFavorite", () => {
+
     const initialState = {
       folders: [
-        {
-          id: 1,
-          user_id: 1,
-          name: "Folder",
-          files: 5,
-          lastUpdate: "2026-08-10",
-          isFavorite: false,
-        },
+          {
+            id: 1,
+            user_id: 1,
+            name: "Folder",
+            files: [],
+            lastUpdate: "2026-08-10",
+            isFavorite: false,
+          },
       ],
       loading: false,
       error: null,
@@ -192,18 +200,20 @@ describe("folderSlice", () => {
     const state = reducer(
       initialState,
       favoriteFolder.fulfilled(
-        {
-          id: 1,
-          isFavorite: true,
-        },
-        "request-id",
-        {
-          user_id: 1,
-          folder_id: 1,
-        }
+          {
+            id: 1,
+            isFavorite: true,
+          },
+          "request-id",
+          {
+            user_id: 1,
+            folder_id: 1,
+          }
       )
     )
 
-    expect(state.folders[0].isFavorite).toBe(true);
-  });
+    expect(state.folders[0].isFavorite).toBe(true)
+
+  })
+
 })

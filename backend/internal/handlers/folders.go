@@ -167,7 +167,8 @@ func (h *FolderHandler) Favorite(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]interface{}{
-		"is_favorite": newStatus,
+    	"id":         folderID,
+    	"isFavorite": newStatus,
 	})
 }
 
@@ -189,7 +190,7 @@ func (h *FolderHandler) RenameFolder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := h.service.Rename(userID, folderID, req.NewName); err != nil {
+	if err := h.service.Rename(userID, folderID, req.Name); err != nil {
 		if err.Error() == "Папка не найдена" {
 			http.Error(w, err.Error(), http.StatusNotFound)
 			return

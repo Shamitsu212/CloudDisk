@@ -12,7 +12,7 @@ import DeleteModal from "./components/DeleteModal/DeleteModal";
 interface Props {
     id: number,
     name: string,
-    files: number,
+    files: number[],
     lastUpdate: string
 }
 
@@ -49,7 +49,7 @@ function Folder({id, name, files, lastUpdate}:Props){
                 </h5>
 
                 <p className={styles.text__p}>
-                    {files} файлов
+                    {files.length} файлов
                 </p>
 
                 <time className={styles.text__p}>
