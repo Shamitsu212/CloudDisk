@@ -18,6 +18,8 @@ import Logo from '../../UI/Logo/Logo'
 
 import { KeyRound, Mail } from 'lucide-react'
 
+import logImg from "../../../../../assets/pic/auth/log.png"
+
 
 function AuthForm(){
 
@@ -48,66 +50,76 @@ function AuthForm(){
 
     return(
 
-        <form 
-            className={styles.form}
-            onSubmit={handleSubmit}    
-        >
+        <div className={styles.Container}>
 
-            <div className={styles.form__collumn}>
-
-                <Logo/>
-
-                <div className={styles.collumn__description}>
-                    <h1 className={styles.description__h}>Добро пожаловать!</h1>
-                    <p className={styles.description__p}>Войдите в свой аккаунт чтобы продолжить</p>
-                </div>
-            
-                <div className={styles.collumn__inputs}>
-
-                    <Input 
-                        value={email} 
-                        setValue={setEmail}
-
-                        placeholder='Enter email'
-                        type='email'
-
-                        label='Email'
-                        icon={<Mail size={14} />}
-                    />
-
-
-
-                    <Input 
-                        value={password}
-                        setValue={setPassword}
-
-                        placeholder='Enter password'
-                        type='password'
-
-                        label='Password'
-                        icon={<KeyRound size={14} />}
-                    />
-
-                </div>
-
-            </div>
-
-            <div className={styles.form__button}>
-                <Button 
-                    text='Войти' 
-                    type='submit'
-                />
-            </div>
-
-            <Link
-                to="/register"
-                className={styles.form__redirect} 
+            <form 
+                className={styles.Container__form}
+                onSubmit={handleSubmit}    
             >
-                Еще не зарегестрированны? 
-            </Link>
-            
 
-        </form>
+                <div className={styles.form__collumn}>
+
+                    <Logo/>
+
+                    <div className={styles.collumn__description}>
+                        <h1 className={styles.description__h}>Добро пожаловать!</h1>
+                        <p className={styles.description__p}>Войдите в свой аккаунт чтобы продолжить</p>
+                    </div>
+
+                    <div className={styles.collumn__inputs}>
+
+                        <Input 
+                            value={email} 
+                            setValue={setEmail}
+
+                            placeholder='Enter email'
+                            type='email'
+
+                            label='Email'
+                            icon={<Mail size={14} />}
+                        />
+
+
+
+                        <Input 
+                            value={password}
+                            setValue={setPassword}
+
+                            placeholder='Enter password'
+                            type='password'
+
+                            label='Password'
+                            icon={<KeyRound size={14} />}
+                        />
+
+                    </div>
+
+                </div>
+
+                <div className={styles.form__button}>
+                    <Button 
+                        text='Войти' 
+                        type='submit'
+                    />
+                </div>
+
+                <Link
+                    to="/register"
+                    className={styles.form__redirect} 
+                >
+                    Еще не зарегестрированны? 
+                </Link>
+
+
+            </form>
+
+            <div className={styles.Container__wrapper}>
+
+                <img src={logImg} className={styles.wrapper__img} />
+
+            </div>
+
+        </div>
 
     )
 }

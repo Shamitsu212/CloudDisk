@@ -17,7 +17,7 @@ import { login } from '../../../../slice/authSlice'
 import { useAppNavigate } from '../../../../../app/hooks/useAppNavigate';
 import { Link } from 'react-router-dom'
 
-
+import regImg from "../../../../../assets/pic/auth/reg.png"
 
 
 function RegForm(){
@@ -50,79 +50,89 @@ function RegForm(){
 
     return(
 
-        <form 
-            className={styles.form}
-            onSubmit={handleSubmit}    
-        >
+        <div className={styles.Container}>
 
-            <div className={styles.form__collumn}>
+            <form 
+                className={styles.Container__form}
+                onSubmit={handleSubmit}    
+            >
 
-                <Logo/>
+                <div className={styles.form__collumn}>
 
-                <div className={styles.collumn__description}>
-                    <h1 className={styles.description__h}>Создайте аккаунт</h1>
-                    <p className={styles.description__p}>Начните хранить свои данные в облаке</p>
-                </div>
+                    <Logo/>
 
-                <div className={styles.collumn__inputs}>
+                    <div className={styles.collumn__description}>
+                        <h1 className={styles.description__h}>Создайте аккаунт</h1>
+                        <p className={styles.description__p}>Начните хранить свои данные в облаке</p>
+                    </div>
 
-                
-                    <Input 
-                        value={email} 
-                        setValue={setEmail}
-                        placeholder='Enter email'
-                        type='email'
-                        label='Email'
-                        icon={<Mail size={14} />}
-                    />
-                    <Input 
-                        value={name} 
-                        setValue={setName}
-                        placeholder='Enter Username'
-                        type='text'
-                        label='Username'
-                        icon={<User size={14}  />}
-                    />
-                    <div className={styles.inputs__password}>
+                    <div className={styles.collumn__inputs}>
+
 
                         <Input 
-                            value={password}
-                            setValue={setPassword}
-                            placeholder='Enter password'
-                            type='password'
-                            label='Password'
-                            icon={<KeyRound size={14}  />}
+                            value={email} 
+                            setValue={setEmail}
+                            placeholder='Enter email'
+                            type='email'
+                            label='Email'
+                            icon={<Mail size={14} />}
                         />
+                        <Input 
+                            value={name} 
+                            setValue={setName}
+                            placeholder='Enter Username'
+                            type='text'
+                            label='Username'
+                            icon={<User size={14}  />}
+                        />
+                        <div className={styles.inputs__password}>
 
-                        <p className={styles.password__description}>
-                            <ShieldAlert size={12} />
-                            at least 8 characters
-                        </p>
+                            <Input 
+                                value={password}
+                                setValue={setPassword}
+                                placeholder='Enter password'
+                                type='password'
+                                label='Password'
+                                icon={<KeyRound size={14}  />}
+                            />
 
+                            <p className={styles.password__description}>
+                                <ShieldAlert size={12} />
+                                at least 8 characters
+                            </p>
+
+
+                        </div>
 
                     </div>
 
+
                 </div>
-                
+
+                <div>
+                    <Button 
+                        text='Зарегестрироваться' 
+                        type='submit'
+                    />
+                </div>
+
+                <Link
+                    to="/login"
+                    className={styles.form__redirect} 
+                >
+                    Уже зарегестрированны? Нажмите чтоб перейти к авторизации
+                </Link>
+
+
+            </form>
+
+            <div className={styles.Container__wrapper}>
+
+                <img src={regImg} className={styles.wrapper__img} />
 
             </div>
-
-            <div>
-                <Button 
-                    text='Зарегестрироваться' 
-                    type='submit'
-                />
-            </div>
-
-            <Link
-                to="/login"
-                className={styles.form__redirect} 
-            >
-                Уже зарегестрированны? Нажмите чтоб перейти к авторизации
-            </Link>
             
-
-        </form>
+        </div>
 
     )
 }
