@@ -7,17 +7,19 @@ import Input from '../../UI/Input/Input'
 
 import { loginRequest } from '../../../../api/auth/authApi'
 
-import { useAppDispatch } from '../../../../../app/store/useAppHooks'
-import { login } from '../../../../slice/authSlice'
-import Logo from '../../UI/Logo/Logo'
-import { KeyRound, Mail } from 'lucide-react'
 import { useAppNavigate } from '../../../../../app/hooks/useAppNavigate';
 
-interface Props {
-    changeForm: (form: "log" | "reg") => void
-}
+import { Link } from 'react-router-dom'
 
-function AuthForm({changeForm}: Props){
+import { useAppDispatch } from '../../../../../app/store/useAppHooks'
+import { login } from '../../../../slice/authSlice'
+
+import Logo from '../../UI/Logo/Logo'
+
+import { KeyRound, Mail } from 'lucide-react'
+
+
+function AuthForm(){
 
     const nav = useAppNavigate()
 
@@ -97,9 +99,12 @@ function AuthForm({changeForm}: Props){
                 />
             </div>
 
-            <button className={styles.form__redirect} onClick={() => changeForm("reg")}>
+            <Link
+                to="/register"
+                className={styles.form__redirect} 
+            >
                 Еще не зарегестрированны? 
-            </button>
+            </Link>
             
 
         </form>

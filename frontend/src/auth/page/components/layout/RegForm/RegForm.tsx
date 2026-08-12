@@ -11,14 +11,16 @@ import { KeyRound, Mail, ShieldAlert, User } from 'lucide-react'
 import { regRequest } from '../../../../api/reg/regApi'
 
 import { useAppDispatch } from '../../../../../app/store/useAppHooks'
+
 import { login } from '../../../../slice/authSlice'
+
 import { useAppNavigate } from '../../../../../app/hooks/useAppNavigate';
+import { Link } from 'react-router-dom'
 
-interface Props {
-    changeForm: (form: "log" | "reg") => void
-}
 
-function RegForm({changeForm}: Props){
+
+
+function RegForm(){
 
     const nav = useAppNavigate()
 
@@ -112,9 +114,12 @@ function RegForm({changeForm}: Props){
                 />
             </div>
 
-            <button className={styles.form__redirect} onClick={() => changeForm("log")}>
+            <Link
+                to="/login"
+                className={styles.form__redirect} 
+            >
                 Уже зарегестрированны? Нажмите чтоб перейти к авторизации
-            </button>
+            </Link>
             
 
         </form>
