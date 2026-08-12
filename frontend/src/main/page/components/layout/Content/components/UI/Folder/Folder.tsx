@@ -3,11 +3,18 @@ import styles from "./Folder.module.css"
 import { useRef, useState } from "react";
 import { useClickOutside } from "./hooks/useClickOutside"
 
-import { EllipsisVerticalIcon, FolderIcon } from "lucide-react"
+import { EllipsisVerticalIcon} from "lucide-react"
+
 import { useAppNavigate } from "../../../../../../../../app/hooks/useAppNavigate";
+
 import FolderMenu from "./components/FolderMenu/FolderMenu";
 import RenameModal from "./components/RenameModal/RenameModal";
 import DeleteModal from "./components/DeleteModal/DeleteModal";
+
+import { formatDate } from "./utils/formatDate";
+
+import folderImg from "../../../../../../../../assets/pic/folder/folder.png"
+
 
 interface Props {
     id: number,
@@ -39,7 +46,7 @@ function Folder({id, name, files, lastUpdate}:Props){
         >
 
             <div className={styles.article__folder}>
-                <FolderIcon size={62}/>
+                <img src={folderImg} className={styles.folder__img}/>
             </div>
 
             <div className={styles.article__text}>
@@ -53,7 +60,15 @@ function Folder({id, name, files, lastUpdate}:Props){
                 </p>
 
                 <time className={styles.text__p}>
-                    Обновлено — {lastUpdate}
+                    
+                    <span>
+                        Обновлено:
+                    </span>
+                    
+                    <span>
+                        {formatDate(lastUpdate)}
+                    </span>
+                    
                 </time>
 
             </div>

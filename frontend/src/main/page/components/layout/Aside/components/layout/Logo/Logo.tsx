@@ -1,8 +1,8 @@
 import styles from "./Logo.module.css"
 
-import { CloudIcon } from "lucide-react"
 import { useAppNavigate } from "../../../../../../../../app/hooks/useAppNavigate"
 
+import logo from '../../../../../../../../assets/pic/Logo/Logo_day.png'
 
 function Logo(){
 
@@ -17,8 +17,9 @@ function Logo(){
             className={styles.Logo}
             onClick={handleClick}    
         >
-
-            <CloudIcon size={77} className={styles.Logo__icon}/>
+            <div>
+                <img src={logo} className={styles.Logo__icon}/>
+            </div>
 
             <p className={styles.Logo__text}>CloudDisk</p>
 

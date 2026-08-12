@@ -10,8 +10,8 @@
 }
 
 .Logo__icon{
-    color: var(--primary);
-    transition: all 0.4s ease;
+    width: 92px;
+    height: 62px;
 }
 
 .Logo:hover .Logo__icon{

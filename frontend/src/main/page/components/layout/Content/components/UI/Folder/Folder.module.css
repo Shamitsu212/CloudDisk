@@ -1,5 +1,5 @@
 .article{
-    width: 310px;
+    width: 340px;
     height: 150px;
     flex-shrink: 0;
 
@@ -26,12 +26,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    transition: all 0.4s ease;
 }
-
-.article:hover .article__folder{
-    color: var(--primary-hover);
+.folder__img{
+    width: 112px;
+    height: 97px;
 }
 
 .article__text{
@@ -55,6 +53,10 @@
 }
 
 .text__p{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
     font-weight: 400;
     font-size: 0.8rem;
     color: var(--text-sec);
@@ -63,7 +65,7 @@
 .article__button{
     position: absolute;
     right: 10px;
-    top: 8px;
+    top: 15px;
 
     border: none;
     outline: none;

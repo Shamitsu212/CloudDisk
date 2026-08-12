@@ -1,4 +1,4 @@
-import { FolderArchive, StarIcon } from "lucide-react"
+import { Folder, StarIcon } from "lucide-react"
 import styles from "./ButtonList.module.css"
 import Button from "../../UI/Button/Button"
 
@@ -8,7 +8,7 @@ function ButtonList(){
     const buttons = [
         {
             id: 0,
-            icon: <FolderArchive  size={34}/>,
+            icon: <Folder  size={34}/>,
             text: "Мои файлы"
         },
         {
