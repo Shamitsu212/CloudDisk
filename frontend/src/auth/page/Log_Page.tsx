@@ -10,9 +10,7 @@ function Log_Page(){
     return(
         <div className={styles.page}>
 
-            <div>
-                <AuthForm/>
-            </div>
+            <AuthForm/>
 
         </div>
     )

@@ -2,22 +2,26 @@
 
     display: flex;
     flex-direction: column;
+    align-items: center;
+
     gap: 7px;
 
     padding: 2.5px;
 
-    align-items: start;
+    
 
-    width: 100%;
-    max-width: 340px;
+    width: 90%;
+    height: 40%;
 }
 .Container__label{
     font-family: var(--font-main);
-    font-size: 1rem;
+    font-size: 1.5rem;
+
+    align-self: flex-start;
 }
 .Container__inputContainer{
     border-radius: 8px;
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
     padding: 5px;
 
     display: flex;
@@ -26,16 +30,16 @@
     gap: 5px;
 
     width: 100%;
-    max-width: 340px;
 
     transition: border-color 0.2s ease;
 }
 .inputContainer__icon{
+    margin-top: 5px;
     color: #6b7280;
 }
 .inputContainer__input{
     font-family: var(--font-main);
-    font-size: 0.9rem;
+    font-size: 1.4rem;
 
     border: none;
     outline: none;

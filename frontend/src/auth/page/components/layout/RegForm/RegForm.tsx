@@ -59,7 +59,9 @@ function RegForm(){
 
                 <div className={styles.form__collumn}>
 
-                    <Logo/>
+                    <div className={styles.collumn__Logo}>
+                        <Logo/>
+                    </div>
 
                     <div className={styles.collumn__description}>
                         <h1 className={styles.description__h}>Создайте аккаунт</h1>
@@ -75,7 +77,7 @@ function RegForm(){
                             placeholder='Enter email'
                             type='email'
                             label='Email'
-                            icon={<Mail size={14} />}
+                            icon={<Mail size={28} />}
                         />
                         <Input 
                             value={name} 
@@ -83,9 +85,8 @@ function RegForm(){
                             placeholder='Enter Username'
                             type='text'
                             label='Username'
-                            icon={<User size={14}  />}
+                            icon={<User size={28}  />}
                         />
-                        <div className={styles.inputs__password}>
 
                             <Input 
                                 value={password}
@@ -93,16 +94,15 @@ function RegForm(){
                                 placeholder='Enter password'
                                 type='password'
                                 label='Password'
-                                icon={<KeyRound size={14}  />}
+                                icon={<KeyRound size={28}  />}
                             />
 
                             <p className={styles.password__description}>
-                                <ShieldAlert size={12} />
+                                <ShieldAlert size={28} />
                                 at least 8 characters
                             </p>
 
 
-                        </div>
 
                     </div>
 
@@ -120,7 +120,7 @@ function RegForm(){
                     to="/login"
                     className={styles.form__redirect} 
                 >
-                    Уже зарегестрированны? Нажмите чтоб перейти к авторизации
+                    Уже зарегестрированны? 
                 </Link>
 
 

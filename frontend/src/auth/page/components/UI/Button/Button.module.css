@@ -2,9 +2,9 @@
     border: none;
     outline: none;
 
-    padding: 8px;
+    padding: 12px 25px 12px 25px;
     background-color: var(--primary);
-    border-radius: 18px;
+    border-radius: 12px;
 
     font-family: var(--font-main);
     font-weight: 400;

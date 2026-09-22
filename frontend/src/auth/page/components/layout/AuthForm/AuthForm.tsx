@@ -59,7 +59,10 @@ function AuthForm(){
 
                 <div className={styles.form__collumn}>
 
-                    <Logo/>
+                    <div className={styles.collumn__Logo}>
+                        <Logo/>
+                    </div>
+                    
 
                     <div className={styles.collumn__description}>
                         <h1 className={styles.description__h}>Добро пожаловать!</h1>
@@ -76,7 +79,7 @@ function AuthForm(){
                             type='email'
 
                             label='Email'
-                            icon={<Mail size={14} />}
+                            icon={<Mail size={28} />}
                         />
 
 
@@ -89,7 +92,7 @@ function AuthForm(){
                             type='password'
 
                             label='Password'
-                            icon={<KeyRound size={14} />}
+                            icon={<KeyRound size={28} />}
                         />
 
                     </div>
@@ -98,7 +101,7 @@ function AuthForm(){
 
                 <div className={styles.form__button}>
                     <Button 
-                        text='Войти' 
+                        text='Авторизоваться' 
                         type='submit'
                     />
                 </div>

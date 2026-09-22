@@ -7,7 +7,7 @@ function Logo(){
     return(
         
         <div className={styles.logo}>
-            <CloudUpload size={24} color='#2563eb'/>
+            <CloudUpload size={48} color='#2563eb'/>
             CloudDisk
         </div>
     )

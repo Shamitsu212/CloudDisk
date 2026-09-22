@@ -9,9 +9,9 @@ function Reg_Page(){
     return(
         <div className={styles.page}>
 
-            <div>
-                <RegForm />
-            </div>
+
+            <RegForm />
+
 
         </div>
     )
