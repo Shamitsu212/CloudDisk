@@ -3,6 +3,7 @@ import styles from "./Content.module.css"
 import { useAppSelector } from "../../../../../app/store/useAppHooks"
 
 import FoldersList from "./components/layout/FoldersList/FoldersList"
+import FilesList from "./components/layout/FilesList/FilesList"
 
 
 function Content(){
@@ -19,6 +20,8 @@ function Content(){
             </div>
 
             <FoldersList />
+
+            <FilesList />
 
         </div>
     )

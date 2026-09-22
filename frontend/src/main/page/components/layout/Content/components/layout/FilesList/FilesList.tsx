@@ -1,14 +1,14 @@
-import styles from "./FilessList.module.css"
+import styles from "./FilesList.module.css"
 
 import File from "../../UI/File/File"
 
 
 
-function FoldersList(){
+function FilesList(){
 
 
     const files = [
-        {id: 0, name: "Excel таблица", type: "EXCEL"}
+        {id: 0, name: "Excel таблица", type: "EXC", lastUpdate: "09.11.2007"}
     ]
 
     
@@ -21,7 +21,7 @@ function FoldersList(){
             <div className={styles.FilesList__list}>
 
                 {files.map((f) => (
-                    <File id={f.id} name={f.name} type={f.type} />
+                    <File id={f.id} name={f.name} type={f.type} lastUpdate={f.lastUpdate}/>
                 ))}
 
             </div>
@@ -30,4 +30,4 @@ function FoldersList(){
     )
 }
 
-export default FoldersList
+export default FilesList
