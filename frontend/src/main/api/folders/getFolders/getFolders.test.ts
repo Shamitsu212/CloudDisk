@@ -3,7 +3,7 @@ import { beforeEach, describe, vi, it, expect } from "vitest";
 import { getFolders } from "./getFolders";
 import { tokenFetch } from "../../../../app/shared/tokenFetch/tokenFetch";
 
-vi.mock("../../../app/shared/tokenFetch/tokenFetch", () => ({
+vi.mock("../../../../app/shared/tokenFetch/tokenFetch", () => ({
     tokenFetch: vi.fn()
 }))
 

@@ -3,11 +3,11 @@ import { beforeEach, describe, vi, it, expect } from "vitest";
 import { favoriteFile } from "./favoriteFile";
 import { tokenFetch } from "../../../../app/shared/tokenFetch/tokenFetch";
 
-vi.mock("../../../app/shared/tokenFetch/tokenFetch", () => ({
+vi.mock("../../../../app/shared/tokenFetch/tokenFetch", () => ({
     tokenFetch: vi.fn()
 }))
 
-describe("favoriteFolder", () => {
+describe("favoriteFile", () => {
 
     beforeEach(() => {
         vi.resetAllMocks()
