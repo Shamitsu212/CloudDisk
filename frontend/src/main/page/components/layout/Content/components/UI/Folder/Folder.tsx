@@ -1,7 +1,7 @@
 import styles from "./Folder.module.css"
 
 import { useRef, useState } from "react";
-import { useClickOutside } from "./hooks/useClickOutside"
+import { useClickOutside } from "../hooks/useClickOutside"
 
 import { EllipsisVerticalIcon} from "lucide-react"
 
@@ -11,7 +11,7 @@ import FolderMenu from "./components/FolderMenu/FolderMenu";
 import RenameModal from "./components/RenameModal/RenameModal";
 import DeleteModal from "./components/DeleteModal/DeleteModal";
 
-import { formatDate } from "./utils/formatDate";
+import { formatDate } from "../utils/formatDate";
 
 import folderImg from "../../../../../../../../assets/pic/folder/folder.png"
 

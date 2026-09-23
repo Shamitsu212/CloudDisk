@@ -9,6 +9,8 @@
     align-items: center;
     gap: 20%;
 
+    position: relative;
+
     background-color: var(--main);
 }
 

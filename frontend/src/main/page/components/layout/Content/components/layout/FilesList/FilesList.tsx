@@ -6,9 +6,34 @@ import File from "../../UI/File/File"
 
 function FilesList(){
 
+    type FileData = {
+        id: number;
+        name: string;
+        type: "Another" | "EXC" | "PDF" | "PIC" | "PP" | "Word" | "RAR";
+        lastUpdate: string;
+    };
 
-    const files = [
-        {id: 0, name: "Excel таблица", type: "EXC", lastUpdate: "09.11.2007"}
+
+    const files:FileData[] = [
+        {id: 0, name: "Excel таблица", type: "EXC", lastUpdate: "09.11.2007"},
+        {id: 0, name: "Excel таблица", type: "EXC", lastUpdate: "09.11.2007"},
+        {id: 0, name: "Excel таблица", type: "EXC", lastUpdate: "09.11.2007"},
+        {id: 0, name: "Excel таблица", type: "EXC", lastUpdate: "09.11.2007"},
+        {id: 0, name: "Excel таблица", type: "EXC", lastUpdate: "09.11.2007"},
+        {id: 0, name: "Excel таблица", type: "EXC", lastUpdate: "09.11.2007"},
+        {id: 0, name: "Excel таблица", type: "EXC", lastUpdate: "09.11.2007"},
+        {id: 0, name: "Excel таблица", type: "EXC", lastUpdate: "09.11.2007"},
+        {id: 0, name: "Excel таблица", type: "EXC", lastUpdate: "09.11.2007"},
+        {id: 0, name: "Excel таблица", type: "EXC", lastUpdate: "09.11.2007"},
+        {id: 0, name: "Excel таблица", type: "EXC", lastUpdate: "09.11.2007"},
+        {id: 0, name: "Excel таблица", type: "EXC", lastUpdate: "09.11.2007"},
+        {id: 0, name: "Excel таблица", type: "EXC", lastUpdate: "09.11.2007"},
+        {id: 0, name: "Excel таблица", type: "EXC", lastUpdate: "09.11.2007"},
+        {id: 0, name: "Excel таблица", type: "EXC", lastUpdate: "09.11.2007"},
+        {id: 0, name: "Excel таблица", type: "EXC", lastUpdate: "09.11.2007"},
+        {id: 0, name: "Excel таблица", type: "EXC", lastUpdate: "09.11.2007"},
+        {id: 0, name: "Excel таблица", type: "EXC", lastUpdate: "09.11.2007"},
+
     ]
 
     
