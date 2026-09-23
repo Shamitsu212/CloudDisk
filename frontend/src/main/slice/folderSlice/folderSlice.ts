@@ -33,15 +33,21 @@ const folderSlice = createSlice({
                 state.error = action.error.message ?? "Ошибка";
             })
 
+
+
             .addCase(createFolder.fulfilled, (state, action) => {
                 state.folders.push(action.payload);
             })
+
+
 
             .addCase(deleteFolder.fulfilled, (state, action) => {
                 state.folders = state.folders.filter(
                     (folder) => folder.id !== action.payload
                 );
             })
+
+
 
             .addCase(renameFolder.fulfilled, (state, action) => {
                 const folder = state.folders.find(
@@ -52,6 +58,8 @@ const folderSlice = createSlice({
                     folder.name = action.payload.name;
                 }
             })
+
+            
 
             .addCase(favoriteFolder.fulfilled, (state, action) => {
                 const folder = state.folders.find(

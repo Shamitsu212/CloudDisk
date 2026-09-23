@@ -2,7 +2,8 @@ import styles from './RenameModal.module.css'
 
 import { useAppDispatch } from '../../../../../../../../../../app/store/useAppHooks';
 import { useAppSelector } from '../../../../../../../../../../app/store/useAppHooks';
-import { renameFolder } from "../../../../../../../../../slice/folderSlice/folderThunks";
+import { renameFile } from "../../../../../../../../../slice/fileSlice/fileThunks";
+
 import { useState } from 'react';
 import type { SetStateAction } from 'react';
 
@@ -26,7 +27,7 @@ function RenameModal({ open, setOpen, id }:Props){
             return null;
         }
 
-        dispatch(renameFolder({user_id: user_id, folder_id: id, name: value }))
+        dispatch(renameFile({user_id: user_id, file_id: id, name: value }))
     }
 
     return(

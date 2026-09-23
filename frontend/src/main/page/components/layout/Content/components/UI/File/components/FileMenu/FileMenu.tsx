@@ -2,7 +2,7 @@ import styles from './FileMenu.module.css'
 
 import { useAppDispatch } from '../../../../../../../../../../app/store/useAppHooks';
 import { useAppSelector } from '../../../../../../../../../../app/store/useAppHooks';
-import { favoriteFolder} from "../../../../../../../../../slice/folderSlice/folderThunks";
+import { favoriteFile } from "../../../../../../../../../slice/fileSlice/fileThunks";
 
 import { type SetStateAction } from 'react';
 
@@ -31,7 +31,7 @@ function FileMenu({ open, setOpen, openDelete, setOpenDelete, openRename, setOpe
             return null;
         }
         
-        dispatch(favoriteFolder({user_id: user_id, folder_id: id}))
+        dispatch(favoriteFile({user_id: user_id, file_id: id}))
         setOpen(!open)
     }
 

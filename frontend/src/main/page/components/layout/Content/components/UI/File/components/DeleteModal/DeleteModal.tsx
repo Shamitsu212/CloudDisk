@@ -1,6 +1,6 @@
 import styles from './DeleteModal.module.css'
 
-import { deleteFolder} from "../../../../../../../../../slice/folderSlice/folderThunks";
+import { deleteFile } from "../../../../../../../../../slice/fileSlice/fileThunks";
 import { useAppDispatch, useAppSelector } from '../../../../../../../../../../app/store/useAppHooks';
 import type { SetStateAction } from 'react';
 
@@ -23,7 +23,7 @@ function DeleteModal({ open, setOpen, id }:Props){
                 return null;
             }
     
-            dispatch(deleteFolder({user_id: user_id, folder_id: id}))
+            dispatch(deleteFile({user_id: user_id, file_id: id}))
         }
 
     return(
