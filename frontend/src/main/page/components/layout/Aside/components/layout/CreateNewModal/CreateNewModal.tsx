@@ -2,7 +2,7 @@ import styles from './CreateNewModal.module.css'
 
 import { useAppDispatch } from '../../../../../../../../app/store/useAppHooks';
 import { useAppSelector } from '../../../../../../../../app/store/useAppHooks';
-import { createFolder } from '../../../../../../../slice/folderThunks';
+import { createFolder } from '../../../../../../../slice/folderSlice/folderThunks';
 import { useState } from 'react';
 import type { SetStateAction } from 'react';
 

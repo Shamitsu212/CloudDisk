@@ -2,7 +2,7 @@ import styles from './RenameModal.module.css'
 
 import { useAppDispatch } from '../../../../../../../../../../app/store/useAppHooks';
 import { useAppSelector } from '../../../../../../../../../../app/store/useAppHooks';
-import { renameFolder } from "../../../../../../../../../slice/folderThunks";
+import { renameFolder } from "../../../../../../../../../slice/folderSlice/folderThunks";
 import { useState } from 'react';
 import type { SetStateAction } from 'react';
 

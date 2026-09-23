@@ -2,7 +2,7 @@ import styles from './FolderMenu.module.css'
 
 import { useAppDispatch } from '../../../../../../../../../../app/store/useAppHooks';
 import { useAppSelector } from '../../../../../../../../../../app/store/useAppHooks';
-import { favoriteFolder} from "../../../../../../../../../slice/folderThunks";
+import { favoriteFolder} from "../../../../../../../../../slice/folderSlice/folderThunks";
 import { type SetStateAction } from 'react';
 
 interface Props {

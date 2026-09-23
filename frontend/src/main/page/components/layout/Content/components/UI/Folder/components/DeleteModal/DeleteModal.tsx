@@ -1,6 +1,6 @@
 import styles from './DeleteModal.module.css'
 
-import { deleteFolder} from "../../../../../../../../../slice/folderThunks";
+import { deleteFolder} from "../../../../../../../../../slice/folderSlice/folderThunks";
 import { useAppDispatch, useAppSelector } from '../../../../../../../../../../app/store/useAppHooks';
 import type { SetStateAction } from 'react';
 
