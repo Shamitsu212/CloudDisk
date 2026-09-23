@@ -1,14 +1,13 @@
 import { beforeEach, describe, vi, it, expect } from "vitest";
 
-
-import { tokenFetch } from "../../../app/shared/tokenFetch/tokenFetch";
-import { deleteFolder } from "./deleteFolder";
+import { getFolders } from "./getFolders";
+import { tokenFetch } from "../../../../app/shared/tokenFetch/tokenFetch";
 
 vi.mock("../../../app/shared/tokenFetch/tokenFetch", () => ({
     tokenFetch: vi.fn()
 }))
 
-describe("deleteFolder.test", () => {
+describe("getFolders", () => {
 
     beforeEach(() => {
         vi.resetAllMocks()
@@ -16,15 +15,20 @@ describe("deleteFolder.test", () => {
 
     it("success", async() => {
 
+        const responseData = {
+            folders: []
+        }
+
         vi.mocked(tokenFetch).mockResolvedValue({
 
             ok: true,
+            json: vi.fn().mockResolvedValue(responseData)
 
         } as unknown as Response)
 
-        const result = await deleteFolder(1, 1)
+        const result = await getFolders(1)
 
-        expect(result).toBeUndefined()
+        expect(responseData).toEqual(result)
 
     })
 
@@ -36,7 +40,8 @@ describe("deleteFolder.test", () => {
 
         } as unknown as Response)
 
-        await expect(deleteFolder(1, 1)).rejects.toThrow("Ошибка при удалении папки")
+        await expect(getFolders(1)).rejects.toThrow("Ошибка загрузки папок")
+
     })
 
 })

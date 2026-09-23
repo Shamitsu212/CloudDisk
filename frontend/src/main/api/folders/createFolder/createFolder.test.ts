@@ -1,7 +1,7 @@
 import { beforeEach, describe, vi, it, expect } from "vitest";
 
 import { createFolder } from "./createFolder";
-import { tokenFetch } from "../../../app/shared/tokenFetch/tokenFetch";
+import { tokenFetch } from "../../../../app/shared/tokenFetch/tokenFetch";
 
 vi.mock("../../../app/shared/tokenFetch/tokenFetch", () => ({
   tokenFetch: vi.fn(),

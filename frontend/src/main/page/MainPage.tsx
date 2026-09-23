@@ -4,7 +4,7 @@ import Aside from './components/layout/Aside/Aside'
 import Content from './components/layout/Content/Content'
 
 import { useAppDispatch, useAppSelector } from '../../app/store/useAppHooks'
-import { fetchFolders } from '../slice/folderThunks'
+import { fetchFolders } from '../slice/folderSlice/folderThunks'
 
 import { useEffect } from 'react'
 

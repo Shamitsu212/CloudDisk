@@ -1,23 +1,24 @@
 import { beforeEach, describe, vi, it, expect } from "vitest";
 
-import { getFolders } from "./getFolders";
-import { tokenFetch } from "../../../app/shared/tokenFetch/tokenFetch";
+import { favoriteFile } from "./favoriteFile";
+import { tokenFetch } from "../../../../app/shared/tokenFetch/tokenFetch";
 
 vi.mock("../../../app/shared/tokenFetch/tokenFetch", () => ({
     tokenFetch: vi.fn()
 }))
 
-describe("getFolders", () => {
+describe("favoriteFolder", () => {
 
     beforeEach(() => {
         vi.resetAllMocks()
     })
 
-    it("success", async() => {
+    it("succes", async() => {
 
         const responseData = {
-            folders: []
-        }
+            user_id: 1,
+            folder_id: 1,
+        };
 
         vi.mocked(tokenFetch).mockResolvedValue({
 
@@ -26,21 +27,21 @@ describe("getFolders", () => {
 
         } as unknown as Response)
 
-        const result = await getFolders(1)
+        const result = await favoriteFile(1, 1)
 
-        expect(responseData).toEqual(result)
-
+        expect(result).toEqual(responseData)
     })
 
     it("error", async() => {
 
+
         vi.mocked(tokenFetch).mockResolvedValue({
 
-            ok: false
+            ok: false,
 
         } as unknown as Response)
 
-        await expect(getFolders(1)).rejects.toThrow("Ошибка загрузки папок")
+        await expect(favoriteFile(1, 1)).rejects.toThrow("Ошибка при добавлении в избранные")
 
     })
 

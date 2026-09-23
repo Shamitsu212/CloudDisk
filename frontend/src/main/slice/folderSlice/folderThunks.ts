@@ -1,10 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { getFolders } from "../api/getFolders/getFolders";
-import { createFolder as createFolderApi } from "../api/createFolder/createFolder";
-import { deleteFolder as deleteFolderApi } from "../api/deleteFolder/deleteFolder";
-import { renameFolder as renameFolderApi } from "../api/renameFolder/renameFolder";
-import { favoriteFolder as favoriteFolderApi } from "../api/favoriteFolder/favoriteFolder";
+import { getFolders } from "../../api/folders/getFolders/getFolders";
+import { createFolder as createFolderApi } from "../../api/folders/createFolder/createFolder";
+import { deleteFolder as deleteFolderApi } from "../../api/folders/deleteFolder/deleteFolder";
+import { renameFolder as renameFolderApi } from "../../api/folders/renameFolder/renameFolder";
+import { favoriteFolder as favoriteFolderApi } from "../../api/folders/favoriteFolder/favoriteFolder";
 
 export const fetchFolders = createAsyncThunk(
 
