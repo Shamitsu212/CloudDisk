@@ -8,6 +8,12 @@ function FilesList(){
 
     const files = useAppSelector((state) => state.files.files);
 
+    if(!files || files.length === 0){
+        return(
+            <></>
+        )
+    }
+
     return(
         <div className={styles.FilesList}>
 

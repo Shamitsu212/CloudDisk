@@ -26,3 +26,10 @@
 
     padding: 10px 10px  15px 10px
 }
+.FoldersList__p{
+    margin-top: 20px;
+
+    font-family: var(--font-main);
+    font-weight: 400;
+    font-size: 1.2rem;
+}

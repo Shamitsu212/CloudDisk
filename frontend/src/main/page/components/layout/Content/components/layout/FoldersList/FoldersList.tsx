@@ -12,19 +12,31 @@ function FoldersList(){
 
             <h2 className={styles.FoldersList__h}>Мои папки</h2>
 
-            <div className={styles.FoldersList__list}>
-                {folders?.map((f) => (
+            {folders.length > 0 ? (
 
-                    <Folder 
-                        key={f.id} 
-                        id={f.id}
-                        name={f.name} 
-                        files={f.files} 
-                        lastUpdate={f.lastUpdate} 
-                    />
-                    
-                ))}
-            </div>
+                <div className={styles.FoldersList__list}>
+                    {folders?.map((f) => (
+
+                        <Folder 
+                            key={f.id} 
+                            id={f.id}
+                            name={f.name} 
+                            files={f.files} 
+                            lastUpdate={f.lastUpdate} 
+                        />
+
+                    ))}
+                </div>
+
+            )
+            :
+            (
+                <p className={styles.FoldersList__p}>
+                    Создайте первую папку
+                </p>
+            )
+            
+            }
 
         </div>
     )
