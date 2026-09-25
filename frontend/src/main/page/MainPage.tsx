@@ -5,6 +5,7 @@ import Content from './components/layout/Content/Content'
 
 import { useAppDispatch, useAppSelector } from '../../app/store/useAppHooks'
 import { fetchFolders } from '../slice/folderSlice/folderThunks'
+import { fetchFiles } from '../slice/fileSlice/fileThunks'
 
 import { useEffect } from 'react'
 
@@ -21,6 +22,8 @@ function MainPage(){
         }
 
         dispatch(fetchFolders(user_id))
+        dispatch(fetchFiles(user_id));
+
     }, [dispatch, user_id])
 
     return(
