@@ -8,6 +8,7 @@ import { fetchFolders } from '../slice/folderSlice/folderThunks'
 import { fetchFiles } from '../slice/fileSlice/fileThunks'
 
 import { useEffect } from 'react'
+import UploadFile from '../../shared/UploadFile/UploadFile'
 
 
 function MainPage(){
@@ -32,6 +33,9 @@ function MainPage(){
             <Aside/>
 
             <Content/>
+
+
+            <UploadFile />
 
         </div>
     )
